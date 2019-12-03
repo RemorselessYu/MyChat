@@ -2,6 +2,8 @@
  * LoginSceneCtrl.js
  */
 
+window.UserID = null;
+
 cc.Class({
     extends: cc.Component,
 
@@ -25,6 +27,7 @@ cc.Class({
             // 判断是否成功
             if (data.msg === 'ok') {
                 this.userID = data.userID;
+                window.UserID = data.userID;
                 // 隐藏登入页
                 cc.director.loadScene('ChatScene');
             }
