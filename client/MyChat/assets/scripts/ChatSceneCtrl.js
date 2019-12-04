@@ -71,7 +71,7 @@ cc.Class({
         item.opacity = 0.001;
         let text = item.getChildByName('text');
         console.log(text);
-        
+
         text.active = true;
         let label = text.getComponent(cc.Label);
         label.string = string;
@@ -128,7 +128,7 @@ cc.Class({
     createImg(itemType, index) {
         let item = this.createItem(itemType);
         this.convertToImgItem(item, index);
-        this.insertItem(item);
+        this.insertItem(itemType, item);
     },
 
     /**
@@ -139,15 +139,26 @@ cc.Class({
     createText(itemType, string) {
         let item = this.createItem(itemType);
         this.convertToTextItem(item, string);
-        this.insertItem(item);
+        this.insertItem(itemType, item);
     },
 
     /**
      * 插入消息
      * @param {*} item 
      */
-    insertItem(item) {
-        this.content.addChild(item);
+    insertItem(itemType, item) {
+        console.log(item);
+        item.parent = this.content;
+
+
+
+        if (itemType === ItemType.Left) {
+            item.x = -330;
+        } else {
+            item.x = 330;
+        }
+
+
         this.scheduleOnce(() => {
             this.scrollView.scrollToBottom(0.5);
         }, 0.1);
